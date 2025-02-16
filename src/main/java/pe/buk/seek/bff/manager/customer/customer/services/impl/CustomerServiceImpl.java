@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -71,6 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     @Override
+    @Cacheable(value = "customer-id", key = "#id")
     public CustomerResponse getCustomerById(final Long id) {
         final var customerEntity = this.customerRepository.findById(id)
             .orElseThrow(() -> new SimpleException(CustomerErrorEnum.ERROR_NOT_FOUND_CUSTOMER,
@@ -81,6 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Page<CustomerResponse> getAllCustomers(final Pageable pageable) {
         final var customers = this.customerRepository.findAll(pageable);
         return customers.map(this.customerMapper::fromEntityToResponse);

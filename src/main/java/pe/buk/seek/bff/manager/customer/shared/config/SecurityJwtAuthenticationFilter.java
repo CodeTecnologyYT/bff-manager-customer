@@ -34,7 +34,7 @@ import pe.buk.seek.bff.manager.customer.shared.services.JwtService;
  */
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class SecurityJwtAuthenticationFilter extends OncePerRequestFilter {
 
     /** jwtService. */
     private final JwtService jwtService;

@@ -12,6 +12,7 @@
  */
 package pe.buk.seek.bff.manager.customer.customer.controllers.responses;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerResponse {
+public class CustomerResponse implements Serializable {
 
     /** id. */
     private Long id;

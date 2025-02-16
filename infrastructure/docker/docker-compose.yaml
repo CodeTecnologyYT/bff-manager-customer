@@ -13,6 +13,16 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - seek-customer:/var/lib/mysql
+    networks:
+      - seek-network
+
+  redis:
+    container_name: redis
+    image: redis:alpine3.21
+    ports:
+      - "6379:6379"
+    networks:
+      - seek-network
 
   prometheus:
     container_name: prometheus
@@ -27,17 +37,25 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
 
   spring-boot-api:
-    image: bff-manager-customer:latest
+    image: bryanrq/bff-manager-customer:latest
     container_name: spring-boot-api
     depends_on:
       - mysql-db
+      - redis
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       SEEK_DB_SQL_HOSTNAME: ${SEEK_DB_SQL_HOSTNAME}
       SEEK_DB_SQL_PORT: ${SEEK_DB_SQL_PORT}
       SEEK_DB_SQL_DATABASE: ${MYSQL_DATABASE}
       SEEK_DB_SQL_USERNAME: ${MYSQL_USER}
       SEEK_DB_SQL_PASSWORD: ${MYSQL_PASSWORD}
+      SEEK_REDIS_HOSTNAME: ${SEEK_REDIS_HOSTNAME}
+      SEEK_REDIS_PORT: ${SEEK_REDIS_PORT}
+    networks:
+      - seek-network
 volumes:
   seek-customer:
+networks:
+  seek-network:
+    driver: bridge

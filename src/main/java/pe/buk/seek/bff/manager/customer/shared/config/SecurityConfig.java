@@ -47,7 +47,7 @@ public class SecurityConfig {
     /** userDetailsService. */
     private final UserDetailsAuthService userDetailsService;
     /** jwtAuthenticationFilter. */
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final SecurityJwtAuthenticationFilter securityJwtAuthenticationFilter;
 
     // -------------------------------------------------------------------
     // -- Beans Instanciados  --------------------------------------------
@@ -68,7 +68,7 @@ public class SecurityConfig {
                 .requestMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated())
             .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(securityJwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
