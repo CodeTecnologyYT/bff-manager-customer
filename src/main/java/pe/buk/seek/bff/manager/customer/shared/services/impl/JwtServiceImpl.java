@@ -17,6 +17,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 import pe.buk.seek.bff.manager.customer.shared.services.JwtService;
 
 /**
@@ -25,6 +26,7 @@ import pe.buk.seek.bff.manager.customer.shared.services.JwtService;
  * @author Bryan Rosas.
  * @version 1.0.0, 14-02-2025
  */
+@Service
 public class JwtServiceImpl implements JwtService {
 
     /** secret. */

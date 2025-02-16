@@ -1,5 +1,5 @@
 /*
- * @(#)CustomerResponse.java
+ * @(#)CustomerShortResponse.java
  *
  * Copyright (c) SEEK (Chile). All rights reserved.
  *
@@ -20,16 +20,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * CustomerResponse.
+ * CustomerShortResponse.
  *
  * @author Bryan Rosas.
- * @version 1.0.0, 13-02-2025
+ * @version 1.0.0, 15-02-2025
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerResponse {
+public class CustomerShortResponse {
 
     /** id. */
     private Long id;
@@ -43,9 +43,5 @@ public class CustomerResponse {
     private LocalDate dateBirth;
     /** createdAt. */
     private LocalDateTime createdAt;
-    /** dateDeath. */
-    private LocalDate dateDeath;
-    /** dateWithDrawal. */
-    private LocalDate dateWithDrawal;
 
 }

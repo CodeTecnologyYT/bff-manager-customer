@@ -26,7 +26,15 @@ public enum CustomerErrorEnum implements ErrorEnum {
     /** DEFAULT. */
     DEFAULT("99", "Error Generico"),
     /** ERROR_NOT_FOUND_CUSTOMER. */
-    ERROR_NOT_FOUND_CUSTOMER("100", "No se encontro el empleador");
+    ERROR_NOT_FOUND_CUSTOMER("420", "No se encontro el empleador"),
+    /** ERROR_NOT_FOUND_USER. */
+    ERROR_NOT_FOUND_USER("420", "Usuario no se encontro"),
+    /** ERROR_EXITS_USER. */
+    ERROR_EXITS_USER("420", "Ya existe un usuario con ese correo"),
+    /** ERROR_NOT_FOUND_ROLE. */
+    ERROR_NOT_FOUND_ROLE("420", "Role no se encontro"),
+    /** ERROR_AUTENTICACION_USER. */
+    ERROR_AUTENTICACION_USER("420", "Credenciales invalidads");
 
     /** code. */
     private final String code;

@@ -1,5 +1,5 @@
 /*
- * @(#)CustomerRequest.java
+ * @(#)AuthLoginRequest.java
  *
  * Copyright (c) SEEK (Chile). All rights reserved.
  *
@@ -10,39 +10,39 @@
  * In any event, this notice and the above copyright must always be included
  * verbatim with this file.
  */
-package pe.buk.seek.bff.manager.customer.customer.controllers.requests;
+package pe.buk.seek.bff.manager.customer.auth.controllers.requests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
-import java.time.LocalDate;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * CustomerRequest.
+ * AuthLoginRequest.
  *
  * @author Bryan Rosas.
- * @version 1.0.0, 13-02-2025
+ * @version 1.0.0, 14-02-2025
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerRequest {
+public class AuthLoginRequest {
 
-    /** name. */
-    @NotBlank(message = "El nombre el requerido")
-    private String name;
-    /** lastname. */
-    @NotBlank(message = "El apellido es requerido")
-    private String lastname;
-    /** dateBirth. */
-    @NotNull(message = "La fecha de nacimiento es requerida")
-    @PastOrPresent(message = "La fecha de nacimiento no puede ser una fecha despues de hoy")
-    private LocalDate dateBirth;
+    /** email. */
+    @NotEmpty(message = "El email es requerido")
+    @Pattern(
+        regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        message = "El correo debe tener un formato válido"
+    )
+    private String email;
+    /** password. */
+    @NotBlank(message = "El password es requerido")
+    private String password;
 
 }

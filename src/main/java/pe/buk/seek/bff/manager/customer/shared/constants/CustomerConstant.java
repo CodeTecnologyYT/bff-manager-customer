@@ -27,6 +27,8 @@ public final class CustomerConstant {
     public static final String ERROR_AL_AUTORIZAR = "Error al Autorizar";
     /** ERROR_NO_ESPERADO. */
     public static final String ERROR_NO_ESPERADO = "Error no esperado";
+    /** ERROR_DATOS. */
+    public static final String ERROR_DATOS = "Error en la informacion a enviar";
     /** SPRINGDDOC API STATUS CODE 200 **/
     public static final String APICODE_200 = "200";
     /** SPRINGDDOC API STATUS CODE 201 **/

@@ -1,5 +1,5 @@
 /*
- * @(#)CustomerResponse.java
+ * @(#)RoleEntity.java
  *
  * Copyright (c) SEEK (Chile). All rights reserved.
  *
@@ -10,42 +10,46 @@
  * In any event, this notice and the above copyright must always be included
  * verbatim with this file.
  */
-package pe.buk.seek.bff.manager.customer.customer.controllers.responses;
+package pe.buk.seek.bff.manager.customer.auth.entities;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
- * CustomerResponse.
+ * RoleEntity.
  *
  * @author Bryan Rosas.
- * @version 1.0.0, 13-02-2025
+ * @version 1.0.0, 14-02-2025
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CustomerResponse {
+@NoArgsConstructor
+@Entity
+@Table(name = "roles", schema = "db_customers")
+public class RoleEntity {
 
     /** id. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /** name. */
     private String name;
-    /** lastname. */
-    private String lastname;
-    /** age. */
-    private Integer age;
-    /** dateBirth. */
-    private LocalDate dateBirth;
+    /** description. */
+    private String description;
     /** createdAt. */
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-    /** dateDeath. */
-    private LocalDate dateDeath;
-    /** dateWithDrawal. */
-    private LocalDate dateWithDrawal;
 
 }

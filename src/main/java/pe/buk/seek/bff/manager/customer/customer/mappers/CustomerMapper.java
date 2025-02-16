@@ -12,6 +12,7 @@
  */
 package pe.buk.seek.bff.manager.customer.customer.mappers;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -19,6 +20,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import pe.buk.seek.bff.manager.customer.customer.controllers.requests.CustomerRequest;
 import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerResponse;
+import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerShortResponse;
 import pe.buk.seek.bff.manager.customer.customer.entities.CustomerEntity;
 
 /**
@@ -47,6 +49,14 @@ public interface CustomerMapper {
     CustomerResponse fromEntityToResponse(CustomerEntity entity);
 
     /**
+     * Convierte objeto de entidad {@link CustomerEntity} a {@link CustomerShortResponse}
+     *
+     * @param entity {@link CustomerEntity}
+     * @return {@link CustomerShortResponse}
+     */
+    CustomerShortResponse fromEntityToResponseShort(CustomerEntity entity);
+
+    /**
      * Convierte request {@link CustomerRequest} a {@link CustomerEntity}
      *
      * @param request {@link CustomerRequest}
@@ -64,5 +74,19 @@ public interface CustomerMapper {
     @Mapping(target = "age", source = "ageCustomer")
     @BeanMapping(ignoreByDefault = true)
     CustomerEntity addAgeEntity(@MappingTarget CustomerEntity entity, Integer ageCustomer);
+
+    /**
+     * Setea la informacion de la fecha esperanza de vida y fecha de retiro en la entidad
+     *
+     * @param entity {@link CustomerEntity}
+     * @param dateDeathCustomer {@link LocalDate}
+     * @param dateWithDrawalCustomer {@link LocalDate}
+     * @return {@link CustomerEntity}
+     */
+    @Mapping(target = "dateDeath", source = "dateDeathCustomer")
+    @Mapping(target = "dateWithDrawal", source = "dateWithDrawalCustomer")
+    @BeanMapping(ignoreByDefault = true)
+    CustomerEntity addAgeEntity(@MappingTarget CustomerEntity entity, LocalDate dateDeathCustomer,
+        LocalDate dateWithDrawalCustomer);
 
 }

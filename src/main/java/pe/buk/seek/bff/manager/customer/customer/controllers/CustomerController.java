@@ -17,17 +17,24 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pe.buk.seek.bff.manager.customer.customer.controllers.requests.CustomerRequest;
 import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerResponse;
+import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerShortResponse;
+import pe.buk.seek.bff.manager.customer.customer.metrics.CustomerMetricsService;
 import pe.buk.seek.bff.manager.customer.customer.services.CustomerService;
 import pe.buk.seek.bff.manager.customer.shared.constants.CustomerConstant;
 
@@ -45,6 +52,8 @@ public class CustomerController {
 
     /** customerService. */
     private final CustomerService customerService;
+    /** customerMetricsService. */
+    private final CustomerMetricsService customerMetricsService;
 
     // -------------------------------------------------------------------
     // -- Métodos Publicos  ----------------------------------------------
@@ -63,8 +72,9 @@ public class CustomerController {
         content = @Content(schema = @Schema(hidden = true)))
     @ApiResponse(responseCode = CustomerConstant.APICODE_500, description = CustomerConstant.ERROR_NO_ESPERADO,
         content = @Content(schema = @Schema(hidden = true)))
-    public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest request) {
+    public ResponseEntity<CustomerShortResponse> createCustomer(@Valid @RequestBody final CustomerRequest request) {
         final var response = this.customerService.createCustomer(request);
+        this.customerMetricsService.calculateStatistics();
         return ResponseEntity.created(URI.create("/" + response.getId()))
             .body(response);
     }
@@ -85,8 +95,33 @@ public class CustomerController {
         content = @Content(schema = @Schema(hidden = true)))
     @ApiResponse(responseCode = CustomerConstant.APICODE_500, description = CustomerConstant.ERROR_NO_ESPERADO,
         content = @Content(schema = @Schema(hidden = true)))
-    public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable("id") Long id) {
+    public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable("id") final Long id) {
         final var response = this.customerService.getCustomerById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Endpoint obtencion del trabajador por el id
+     *
+     * @param pageCurrent {@link Integer}
+     * @param pageSize {@link Integer}
+     * @return {@link CustomerResponse}
+     */
+    @GetMapping("")
+    @Operation(summary = "Obtener un trabajador por Id", description = "Retorna un trabajador")
+    @ApiResponse(responseCode = CustomerConstant.APICODE_200,
+        description = "Exito al obtener obtener el trabajador por el id")
+    @ApiResponse(responseCode = CustomerConstant.APICODE_404,
+        description = "No se pudo obtener el trabajador por el id")
+    @ApiResponse(responseCode = CustomerConstant.APICODE_403, description = CustomerConstant.ERROR_AL_AUTORIZAR,
+        content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = CustomerConstant.APICODE_500, description = CustomerConstant.ERROR_NO_ESPERADO,
+        content = @Content(schema = @Schema(hidden = true)))
+    public ResponseEntity<Page<CustomerResponse>> getCustomerById(
+        @RequestParam(defaultValue = "0") final int pageCurrent,
+        @RequestParam(defaultValue = "10") final int pageSize) {
+        final var response = this.customerService.getAllCustomers(PageRequest.of(pageCurrent, pageSize,
+            Sort.by("createdAt").descending()));
         return ResponseEntity.ok(response);
     }
 

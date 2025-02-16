@@ -12,8 +12,11 @@
  */
 package pe.buk.seek.bff.manager.customer.customer.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pe.buk.seek.bff.manager.customer.customer.controllers.requests.CustomerRequest;
 import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerResponse;
+import pe.buk.seek.bff.manager.customer.customer.controllers.responses.CustomerShortResponse;
 
 /**
  * CustomerService.
@@ -27,9 +30,9 @@ public interface CustomerService {
      * Crea un empleador
      *
      * @param request {@link CustomerRequest}
-     * @return {@link CustomerResponse}
+     * @return {@link CustomerShortResponse}
      */
-    CustomerResponse createCustomer(CustomerRequest request);
+    CustomerShortResponse createCustomer(CustomerRequest request);
 
     /**
      * Obtiene un empleador por el id
@@ -38,5 +41,13 @@ public interface CustomerService {
      * @return {@link CustomerResponse}
      */
     CustomerResponse getCustomerById(Long id);
+
+    /**
+     * Obtiene los empleados por paginacion
+     *
+     * @param pageable {@link Pageable}
+     * @return page {@link CustomerResponse}
+     */
+    Page<CustomerResponse> getAllCustomers(Pageable pageable);
 
 }

@@ -13,6 +13,8 @@
 package pe.buk.seek.bff.manager.customer.customer.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  * CustomerUtils.
@@ -34,6 +36,28 @@ public final class CustomerUtils {
     public static Integer calculateAge(final LocalDate dateOfBirth) {
         final var today = LocalDate.now();
         return today.getYear() - dateOfBirth.getYear();
+    }
+
+    /**
+     * Calcula la fecha de Esperanza de vida en base a la fecha de nacimiento
+     *
+     * @param dateOfBirth {@link LocalDate}
+     * @return {@link LocalDate}
+     */
+    public static LocalDate calculateLifeDate(final LocalDate dateOfBirth, final Integer ageDeath) {
+        return dateOfBirth.plusYears(ageDeath);
+    }
+
+    /**
+     * Calcula la fecha en la se retira del trabajo segun la fecha de nacimiento
+     *
+     * @param dateOfBirth {@link LocalDate}
+     * @param dateWithDrawal {@link Integer}
+     * @return {@link LocalDate}
+     */
+    public static LocalDate calculateWithDrawalDate(final LocalDate dateOfBirth, final Integer dateWithDrawal) {
+        final var yearWithDrawal = dateWithDrawal - calculateAge(dateOfBirth);
+        return dateOfBirth.plusYears(yearWithDrawal);
     }
 
     // -------------------------------------------------------------------

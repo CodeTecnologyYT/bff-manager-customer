@@ -1,5 +1,5 @@
 /*
- * @(#)CustomerEntity.java
+ * @(#)UserEntity.java
  *
  * Copyright (c) SEEK (Chile). All rights reserved.
  *
@@ -10,16 +10,16 @@
  * In any event, this notice and the above copyright must always be included
  * verbatim with this file.
  */
-package pe.buk.seek.bff.manager.customer.customer.entities;
+package pe.buk.seek.bff.manager.customer.auth.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,42 +29,35 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 /**
- * CustomerEntity.
+ * UserEntity.
  *
  * @author Bryan Rosas.
- * @version 1.0.0, 13-02-2025
+ * @version 1.0.0, 14-02-2025
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "customers", schema = "db_customers")
-public class CustomerEntity {
+@Table(name = "users", schema = "db_customers")
+public class UserEntity {
 
     /** id. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /** name. */
-    private String name;
-    /** lastname. */
-    private String lastname;
-    /** age. */
-    private Integer age;
-    /** dateBirth. */
-    @Column(name = "date_birth")
-    private LocalDate dateBirth;
-    /** dateDeath. */
-    @Column(name = "date_death")
-    private LocalDate dateDeath;
-    /** dateWithDrawal. */
-    @Column(name = "date_with_drawal")
-    private LocalDate dateWithDrawal;
-    /** createdAt. */
+    /** email. */
+    private String email;
+    /** password. */
+    private String password;
+    /** role. */
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
+    /** createAt. */
     @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createAt;
 
 }
