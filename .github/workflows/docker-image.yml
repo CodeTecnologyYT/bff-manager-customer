@@ -68,6 +68,7 @@ jobs:
             --image ${{ secrets.ACR_NAME }}.azurecr.io/bff-manager-customer:latest \
             --cpu 1 \
             --memory 1.5 \
+            --os-type Linux \
             --registry-login-server ${{ secrets.ACR_NAME }}.azurecr.io \
             --registry-username $(az acr credential show --name ${{ secrets.ACR_NAME }} --query username --output tsv) \
             --registry-password $(az acr credential show --name ${{ secrets.ACR_NAME }} --query "passwords[0].value" --output tsv) \
