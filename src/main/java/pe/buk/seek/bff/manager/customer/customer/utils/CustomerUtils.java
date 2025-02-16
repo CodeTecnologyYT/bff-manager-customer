@@ -54,7 +54,8 @@ public final class CustomerUtils {
      * @param ageEstimateWithDrawal {@link Integer}
      * @return {@link LocalDate}
      */
-    public static LocalDate calculateEstimateWithDrawalDate(final LocalDate dateOfBirth, final Integer ageEstimateWithDrawal) {
+    public static LocalDate calculateEstimateWithDrawalDate(final LocalDate dateOfBirth,
+        final Integer ageEstimateWithDrawal) {
         return dateOfBirth.plusYears(ageEstimateWithDrawal);
     }
 
