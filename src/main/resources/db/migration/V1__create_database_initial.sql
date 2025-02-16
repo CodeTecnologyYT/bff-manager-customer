@@ -21,12 +21,12 @@ CREATE TABLE db_customers.users
 -- Creacion de la tabla de customers
 CREATE TABLE db_customers.customers
 (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    name            VARCHAR(255) NOT NULL,
-    lastname        VARCHAR(255) NOT NULL,
-    age             INT          NOT NULL,
-    date_birth      DATE         NOT NULL,
-    date_death      DATE         NULL,
+    id               INT AUTO_INCREMENT PRIMARY KEY,
+    name             VARCHAR(255) NOT NULL,
+    lastname         VARCHAR(255) NOT NULL,
+    age              INT          NOT NULL,
+    date_birth       DATE         NOT NULL,
+    date_death       DATE         NULL,
     date_with_drawal DATE         NULL,
-    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
