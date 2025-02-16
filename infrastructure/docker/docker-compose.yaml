@@ -13,22 +13,31 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - seek-customer:/var/lib/mysql
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
 
   prometheus:
     container_name: prometheus
     image: prom/prometheus
+    depends_on:
+      - spring-boot-api
     ports:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
 
-  spring-boot-app:
-    image: mi-aplicacion:latest
-    container_name: spring-boot-app
+  spring-boot-api:
+    image: bff-manager-customer:latest
+    container_name: spring-boot-api
+    depends_on:
+      - mysql-db
     ports:
       - "8080:8080"
-
+    environment:
+      SEEK_DB_SQL_HOSTNAME: ${SEEK_DB_SQL_HOSTNAME}
+      SEEK_DB_SQL_PORT: ${SEEK_DB_SQL_PORT}
+      SEEK_DB_SQL_DATABASE: ${MYSQL_DATABASE}
+      SEEK_DB_SQL_USERNAME: ${MYSQL_USER}
+      SEEK_DB_SQL_PASSWORD: ${MYSQL_PASSWORD}
 volumes:
   seek-customer:
