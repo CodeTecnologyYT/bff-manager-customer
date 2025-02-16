@@ -50,12 +50,11 @@ public final class CustomerUtils {
      * Calcula la fecha en la se retira del trabajo segun la fecha de nacimiento
      *
      * @param dateOfBirth {@link LocalDate}
-     * @param dateWithDrawal {@link Integer}
+     * @param ageWithDrawal {@link Integer}
      * @return {@link LocalDate}
      */
-    public static LocalDate calculateWithDrawalDate(final LocalDate dateOfBirth, final Integer dateWithDrawal) {
-        final var yearWithDrawal = dateWithDrawal - calculateAge(dateOfBirth);
-        return dateOfBirth.plusYears(yearWithDrawal);
+    public static LocalDate calculateWithDrawalDate(final LocalDate dateOfBirth, final Integer ageWithDrawal) {
+        return dateOfBirth.plusYears(ageWithDrawal);
     }
 
     // -------------------------------------------------------------------
