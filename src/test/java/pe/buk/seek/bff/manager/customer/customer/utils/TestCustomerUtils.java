@@ -42,7 +42,7 @@ public class TestCustomerUtils {
      */
     @Test
     void testYearDeathCustomer() {
-        Assertions.assertThat(CustomerUtils.calculateLifeDate(LocalDate.of(2010, 7, 1), 80))
+        Assertions.assertThat(CustomerUtils.calculateEstimateLifeDate(LocalDate.of(2010, 7, 1), 80))
             .isEqualTo(LocalDate.of(2090, 7, 1));
     }
 
@@ -51,7 +51,7 @@ public class TestCustomerUtils {
      */
     @Test
     void testYearWithDrawalCustomer() {
-        Assertions.assertThat(CustomerUtils.calculateWithDrawalDate(LocalDate.of(2010, 7, 1), 80))
+        Assertions.assertThat(CustomerUtils.calculateEstimateWithDrawalDate(LocalDate.of(2010, 7, 1), 80))
             .isEqualTo(LocalDate.of(2090, 7, 1));
     }
 

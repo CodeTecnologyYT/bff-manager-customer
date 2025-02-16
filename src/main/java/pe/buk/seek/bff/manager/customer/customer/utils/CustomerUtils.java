@@ -40,21 +40,22 @@ public final class CustomerUtils {
      * Calcula la fecha de Esperanza de vida en base a la fecha de nacimiento
      *
      * @param dateOfBirth {@link LocalDate}
+     * @param ageEstimateDeath {@link LocalDate}
      * @return {@link LocalDate}
      */
-    public static LocalDate calculateLifeDate(final LocalDate dateOfBirth, final Integer ageDeath) {
-        return dateOfBirth.plusYears(ageDeath);
+    public static LocalDate calculateEstimateLifeDate(final LocalDate dateOfBirth, final Integer ageEstimateDeath) {
+        return dateOfBirth.plusYears(ageEstimateDeath);
     }
 
     /**
      * Calcula la fecha en la se retira del trabajo segun la fecha de nacimiento
      *
      * @param dateOfBirth {@link LocalDate}
-     * @param ageWithDrawal {@link Integer}
+     * @param ageEstimateWithDrawal {@link Integer}
      * @return {@link LocalDate}
      */
-    public static LocalDate calculateWithDrawalDate(final LocalDate dateOfBirth, final Integer ageWithDrawal) {
-        return dateOfBirth.plusYears(ageWithDrawal);
+    public static LocalDate calculateEstimateWithDrawalDate(final LocalDate dateOfBirth, final Integer ageEstimateWithDrawal) {
+        return dateOfBirth.plusYears(ageEstimateWithDrawal);
     }
 
     // -------------------------------------------------------------------

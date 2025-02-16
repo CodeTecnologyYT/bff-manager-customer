@@ -94,9 +94,9 @@ public class CustomerServiceImpl implements CustomerService {
      */
     private void asyncSlowCalculateCustomer(final CustomerRequest request, final CustomerEntity customerEntity) {
         CompletableFuture.runAsync(() -> {
-            final var estimatedDateDeath = CustomerUtils.calculateLifeDate(request.getDateBirth(),
+            final var estimatedDateDeath = CustomerUtils.calculateEstimateLifeDate(request.getDateBirth(),
                 this.customerProperties.getEstimatedDeathYear());
-            final var estimatedDateWithDrawal = CustomerUtils.calculateWithDrawalDate(request.getDateBirth(),
+            final var estimatedDateWithDrawal = CustomerUtils.calculateEstimateWithDrawalDate(request.getDateBirth(),
                 this.customerProperties.getEstimatedWithDrawalYear());
             final var customerEntityAddAge = this.customerMapper.addAgeEntity(customerEntity, estimatedDateDeath,
                 estimatedDateWithDrawal);
