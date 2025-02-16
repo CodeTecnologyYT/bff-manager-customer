@@ -10,23 +10,41 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    environment: Secret Azure
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # Configurar JDK en GitHub Actions
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      # Generar el archivo JAR con Gradle
+      - name: Build JAR with Gradle
+        run: |
+          chmod +x gradlew
+          ./gradlew bootJar -x test
+
+      # Verificar que el JAR se generó correctamente
+      - name: List build/libs
+        run: ls -lah build/libs
+
       # Iniciar sesión en Azure
-      - name: Log in to Azure
+      - name: 'Login via Azure CLI'
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          auth-type: SERVICE_PRINCIPAL
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      # Iniciar sesión en Azure Container Registry (ACR)
-      - name: Log in to Azure Container Registry
-        run: az acr login --name ${{ secrets.ACR_NAME }}
 
       # Construir y subir la imagen a ACR
       - name: Build and push Docker image
@@ -50,11 +68,13 @@ jobs:
             --image ${{ secrets.ACR_NAME }}.azurecr.io/bff-manager-customer:latest \
             --cpu 1 \
             --memory 1.5 \
+            --os-type Linux \
             --registry-login-server ${{ secrets.ACR_NAME }}.azurecr.io \
             --registry-username $(az acr credential show --name ${{ secrets.ACR_NAME }} --query username --output tsv) \
             --registry-password $(az acr credential show --name ${{ secrets.ACR_NAME }} --query "passwords[0].value" --output tsv) \
             --environment-variables SEEK_DB_SQL_HOSTNAME=${{ secrets.SEEK_DB_SQL_HOSTNAME }} SEEK_DB_SQL_PORT=${{ secrets.SEEK_DB_SQL_PORT }} SEEK_DB_SQL_DATABASE=${{ secrets.SEEK_DB_SQL_DATABASE }} SEEK_DB_SQL_USERNAME=${{ secrets.SEEK_DB_SQL_USERNAME }} SEEK_DB_SQL_PASSWORD=${{ secrets.SEEK_DB_SQL_PASSWORD }} SEEK_REDIS_HOSTNAME=${{ secrets.SEEK_REDIS_HOSTNAME }} SEEK_REDIS_PORT=${{ secrets.SEEK_REDIS_PORT }} \
-            --ports 8080
+            --ports 8080 \
+            --ip-address Public
 
       # Obtener la URL pública del contenedor
       - name: Get container URL
