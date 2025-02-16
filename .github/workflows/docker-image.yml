@@ -43,7 +43,8 @@ jobs:
         with:
           login-server: ${{ secrets.ACR_NAME }}
           username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}≤
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
 
       # Construir y subir la imagen a ACR
       - name: Build and push Docker image
