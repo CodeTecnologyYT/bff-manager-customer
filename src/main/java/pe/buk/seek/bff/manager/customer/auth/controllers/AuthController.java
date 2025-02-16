@@ -30,7 +30,6 @@ import pe.buk.seek.bff.manager.customer.auth.controllers.requests.AuthLoginReque
 import pe.buk.seek.bff.manager.customer.auth.controllers.requests.AuthSignUpRequest;
 import pe.buk.seek.bff.manager.customer.auth.controllers.responses.AuthUserResponse;
 import pe.buk.seek.bff.manager.customer.auth.services.AuthService;
-import pe.buk.seek.bff.manager.customer.auth.services.impl.AuthServiceImpl;
 import pe.buk.seek.bff.manager.customer.shared.constants.CustomerConstant;
 import pe.buk.seek.bff.manager.customer.shared.enums.CustomerErrorEnum;
 import pe.buk.seek.bff.manager.customer.shared.exceptions.SimpleException;

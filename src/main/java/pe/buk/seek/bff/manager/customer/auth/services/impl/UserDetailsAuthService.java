@@ -18,13 +18,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pe.buk.seek.bff.manager.customer.auth.repositories.RoleRepository;
 import pe.buk.seek.bff.manager.customer.auth.repositories.UserRepository;
 import pe.buk.seek.bff.manager.customer.shared.enums.CustomerErrorEnum;
 import pe.buk.seek.bff.manager.customer.shared.exceptions.SimpleException;
-import pe.buk.seek.bff.manager.customer.shared.services.JwtService;
 
 /**
  * UserDetailsService.
