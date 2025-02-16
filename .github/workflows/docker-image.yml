@@ -10,7 +10,7 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: Configure Secret Azure
+    environment: Secret Azure
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
