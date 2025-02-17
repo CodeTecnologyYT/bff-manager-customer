@@ -74,7 +74,8 @@ jobs:
             --registry-password $(az acr credential show --name ${{ secrets.ACR_NAME }} --query "passwords[0].value" --output tsv) \
             --environment-variables SEEK_DB_SQL_HOSTNAME=${{ secrets.SEEK_DB_SQL_HOSTNAME }} SEEK_DB_SQL_PORT=${{ secrets.SEEK_DB_SQL_PORT }} SEEK_DB_SQL_DATABASE=${{ secrets.SEEK_DB_SQL_DATABASE }} SEEK_DB_SQL_USERNAME=${{ secrets.SEEK_DB_SQL_USERNAME }} SEEK_DB_SQL_PASSWORD=${{ secrets.SEEK_DB_SQL_PASSWORD }} SEEK_REDIS_HOSTNAME=${{ secrets.SEEK_REDIS_HOSTNAME }} SEEK_REDIS_PORT=${{ secrets.SEEK_REDIS_PORT }} \
             --ports 8080 \
-            --ip-address Public
+            --ip-address Public \
+            --dns-name-label bff-manager-customer-seek
 
       # Obtener la URL pública del contenedor
       - name: Get container URL
