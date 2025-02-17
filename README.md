@@ -8,6 +8,8 @@ Esta es una aplicacion de sistema de usuario para controlar sus empleados
 - **Gradle**: Para la gestión de dependencias
 - **Spring Data Redis**: Biblioteca para la integración con Redis
 - **Prometheus**: Bibliotica de metricas
+- **Azure**: Infraestructura de servicios
+- **GitHub Actions**: CI/CD
 
 ## **Instalación**
 1. **Clonar el repositorio**:
@@ -26,8 +28,8 @@ En la carpeta [Infraestructura/Docker](https://github.com/CodeTecnologyYT/bff-ma
 ```
 4. **Coleccion de postman**:
 En la carpeta [Collectionn](https://github.com/CodeTecnologyYT/bff-manager-customer/tree/main/collections)
-- Enviroment
-- Endpoints
+- Colleccion de Enviroment: Production y Localhost
+- Collection de Endpoints
 ## **Contacto**
 - **Autor**: [Bryan Rosas Quispe]
 - **Correo**: [bryan.rosas.quispe@gmail.com]
