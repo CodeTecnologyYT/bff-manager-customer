@@ -16,7 +16,7 @@ Esta es una aplicacion de sistema de usuario para controlar sus empleados
    cd bff-manager-customer
 ```
 2. **Configurar Ambiente**: Asegúrate de tener Redis instalado y en ejecución. Puedes usar Docker para instalarlo fácilmente:
-En la carpeta **/Infraestructura/Docker**
+En la carpeta [Infraestructura/Docker](https://github.com/CodeTecnologyYT/bff-manager-customer/tree/main/infrastructure/docker)
 ``` bash
    docker compose up -d
 ```
@@ -25,7 +25,7 @@ En la carpeta **/Infraestructura/Docker**
    ./gradlew bootRun
 ```
 4. **Coleccion de postman**:
-En la carpeta **/Collections**
+En la carpeta [Collectionn](https://github.com/CodeTecnologyYT/bff-manager-customer/tree/main/collections)
 - Enviroment
 - Endpoints
 ## **Contacto**
