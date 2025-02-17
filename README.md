@@ -31,4 +31,4 @@ En la carpeta **/Collections**
 ## **Contacto**
 - **Autor**: [Bryan Rosas Quispe]
 - **Correo**: [bryan.rosas.quispe@gmail.com]
-- **LinkedIn**: [https://linkedin.com/in/tuperfil](https://linkedin.com/in/tuperfil)
+- **LinkedIn**: [https://www.linkedin.com/in/bryanwrq/](https://www.linkedin.com/in/bryanwrq/)
