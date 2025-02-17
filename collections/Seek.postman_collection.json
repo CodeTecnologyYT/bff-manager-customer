@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "bc8e207c-6f83-4ac7-8149-427ce2c1b347",
+		"name": "Seek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3894232",
+		"_collection_link": "https://speeding-sunset-563489.postman.co/workspace/85e5d805-bf4f-4114-a278-57828f57058e/collection/3894232-bc8e207c-6f83-4ac7-8149-427ce2c1b347?action=share&source=collection_link&creator=3894232"
+	},
+	"item": [
+		{
+			"name": "manager customer",
+			"item": [
+				{
+					"name": "customer",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John\",\n  \"lastname\": \"rosas\",\n  \"dateBirth\": \"2010-05-20\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_bff_manager_customer}}/manager/customer",
+									"host": [
+										"{{url_bff_manager_customer}}"
+									],
+									"path": [
+										"manager",
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_bff_manager_customer}}/manager/customer/:id",
+									"host": [
+										"{{url_bff_manager_customer}}"
+									],
+									"path": [
+										"manager",
+										"customer",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_bff_manager_customer}}/manager/customer?pageCurrent=0&pageSize=100",
+									"host": [
+										"{{url_bff_manager_customer}}"
+									],
+									"path": [
+										"manager",
+										"customer"
+									],
+									"query": [
+										{
+											"key": "pageCurrent",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.environment.set(\"auth_token\", jsonData.token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"acuariobr@gmail.com\",\n    \"password\": \"1234\",\n    \"role\": \"ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_bff_manager_customer}}/auth/signup",
+									"host": [
+										"{{url_bff_manager_customer}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.environment.set(\"auth_token\", jsonData.token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_bff_manager_customer}}/auth/login",
+									"host": [
+										"{{url_bff_manager_customer}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
